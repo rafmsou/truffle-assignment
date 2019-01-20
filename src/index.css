@@ -60,3 +60,22 @@ code {
   top: 40%;
   opacity: 0.7;
 }
+
+/** Loading image */
+
+.loading-atom {
+  animation: loading-atom-spin infinite 20s linear;
+  height: 25vmin;
+  position: absolute;
+  left: 30%;
+  top: 30%;
+}
+
+@keyframes loading-atom-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

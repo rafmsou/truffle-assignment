@@ -1,8 +1,10 @@
+import config from '../config'
 
 export const RECEIVE_CONTENTS = 'RECEIVE_CONTENTS'
 
 export const getContents = () => async (dispatch) => {
-  const response = await fetch('http://tm-kitchen-api-alpha.herokuapp.com/videos?api_key=homework&auth_token=1&limit=10&workflow_status=ready')
+  const url = config.backendHost + config.backendEndpoint
+  const response = await fetch(url)
   const data = await response.json()
 
   dispatch({

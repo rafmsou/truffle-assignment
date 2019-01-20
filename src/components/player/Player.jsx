@@ -27,7 +27,7 @@ const InfoBlock = styled.div`
 
 const Title = styled.h1`
   color: #151515;
-  font-size: 2.5em;
+  font-size: 2em;
   text-align: left;
   margin-top: 10px;
   margin-bottom: 10px;

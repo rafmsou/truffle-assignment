@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
 
+import loadingImg from './loading.svg'
+
 const Container = styled.div`
   width: 99vw;
   height: 99vh;
@@ -74,7 +76,7 @@ class ContentView extends React.PureComponent {
   render() {
     const content = this.getContentToRender()
       if (!content) {
-        return null
+        return <img src={loadingImg} className="loading-atom" alt="logo" />
       }
 
       const nextUrl = this.genNextUrl(content)
