@@ -15,15 +15,14 @@ function videoTypeForPlatform() {
 }
 
 function findMediaInAsset(asset) {
+  const mediaType = asset['slot_type']
+
   //define height and width based content type
   let height, width
-  console.log(asset['slot_type']);
-
-  if (asset['slot_type'].includes('landscape')) {
+  if (mediaType.includes('landscape') || mediaType.includes('square')) {
     height = 720
     width = 1280
   } else {
-    // than it is portrait or squared
     height = 1280
     width = 720
   }

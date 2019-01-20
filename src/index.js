@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter, Switch, Route } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
 import ContentView from './components/content/ContentView'
@@ -16,12 +16,12 @@ store.dispatch(getContents())
 const routes = (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Router>
+      <HashRouter>
         <Switch>
           <Route exact path="/" component={ContentView}/>
           <Route exact path="/content/:contentTitle/:contentId" component={ContentView} />
         </Switch>
-      </Router>
+      </HashRouter>
     </ConnectedRouter>
   </Provider>
 )
