@@ -1,16 +1,43 @@
-import find from 'lodash/find';
+import find from 'lodash/find'
+
+function imageTypeForPlatform() {
+  if (window.isMobile.any) {
+    return 'portrait_thumbnail_asset'
+  }
+  return 'landscape_thumbnail_asset'
+}
+
+function videoTypeForPlatform() {
+  if (window.isMobile.any) {
+    return 'portrait_asset_video_asset'
+  }
+  return 'landscape_asset_video_asset'
+}
 
 function findMediaInAsset(asset) {
+  //define height and width based content type
+  let height, width
+  console.log(asset['slot_type']);
+
+  if (asset['slot_type'].includes('landscape')) {
+    height = 720
+    width = 1280
+  } else {
+    // than it is portrait or squared
+    height = 1280
+    width = 720
+  }
+
   return find(
     asset['video_asset']['mp4_renditions'],
-    item => item['width'] === 1280 && item['height'] === 720
+    item => item['width'] === width && item['height'] === height
   )
 }
 
 function findAssetTypeInAssets(assets, type) {
   return find(
     assets,
-    item => item['is_primary'] && item['slot_type'] === type
+    item => item['slot_type'] === type
   )
 }
 
@@ -47,18 +74,28 @@ export class Content {
   parseBackgroundImage(assetsJson) {
     const thumbnail = find(
       assetsJson,
-      item => item['is_primary'] && item['slot_type'] === 'landscape_thumbnail_asset'
+      item => item['slot_type'] === imageTypeForPlatform()
     )
 
     if (thumbnail) {
       return thumbnail.asset.url
     }
 
-    return '';
+    // try to fallback a squared image
+    const fallback = find(
+      assetsJson,
+      item => item['slot_type'] === 'square_thumbnail_asset'
+    )
+
+    if (fallback) {
+      return fallback.asset.url
+    }
+
+    return ''
   }
 
   parsePlaybackData(associatedVideoAssets) {
-    const videoAsset = findAssetTypeInAssets(associatedVideoAssets, 'landscape_asset_video_asset')
+    const videoAsset = findAssetTypeInAssets(associatedVideoAssets, videoTypeForPlatform())
 
     if (videoAsset) {
       const sample = findMediaInAsset(videoAsset)
@@ -75,6 +112,6 @@ export class Content {
         return [sample.url, videoAssetFallback['video_asset']['duration']]
       }
     }
-    return ['', 0];
+    return ['', 0]
   }
 }

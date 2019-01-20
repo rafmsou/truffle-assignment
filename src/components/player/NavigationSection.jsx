@@ -8,6 +8,10 @@ const Container = styled.div`
   right: 0;
   bottom: 5px;
   position: absolute;
+  ${window.isMobile.any && `
+    position: relative;
+    display: inline-flex;
+  `}
 `
 
 const NavigationSection  = ({prevUrl, nextUrl}) => (

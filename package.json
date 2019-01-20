@@ -1,6 +1,5 @@
 {
   "name": "truffle-sample",
-  "homepage": "https://rafmsou.github.io/truffle-assignment",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,7 +21,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -37,7 +35,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.0.1",
     "redux-devtools-extension": "^2.13.7"
   }
 }

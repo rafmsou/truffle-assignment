@@ -14,14 +14,13 @@ const InfoBlock = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  background-color:#e4e4e4;
+  background-color:#f3f3f3;
   position: absolute;
   bottom: 0;
   left: 0;
   padding: 15px;
   height: auto;
   width: 100%;
-  border: 1px blue #e4e4e4;
   z-index: 5;
 `
 
@@ -34,15 +33,20 @@ const Title = styled.h1`
 `
 
 const Description = styled.p`
-  font-size: 1.3em;
+  font-size: 1.2em;
+  line-height: 1.2em;
   color: #545454;
   text-align: left;
   max-width: 60%;
   margin-top: 10px;
+  ${window.isMobile.any && `
+    max-width: 100%;
+  `}
 `
 
 const Date = styled(Description)`
-  font-size: 1em;
+  margin-top: -5px;
+  font-size: 0.9em;
 `
 
 const Poster = styled.div`
@@ -57,9 +61,7 @@ export default class Player extends React.Component {
 
   componentDidMount() {
     // instantiate Video.js
-    this.player = videojs(this.videoNode, this.props, () => {
-      console.log('onPlayerReady', this)
-    });
+    this.player = videojs(this.videoNode, this.props);
 
     this.player.on('play', () => this.setState({ showOverlay: false, initialized: true }))
     this.player.on('pause', () => this.setState({ showOverlay: true }))
