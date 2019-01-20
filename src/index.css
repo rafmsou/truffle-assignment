@@ -67,7 +67,8 @@ code {
   animation: loading-atom-spin infinite 20s linear;
   height: 25vmin;
   position: absolute;
-  left: 30%;
+  left: 50%;
+  margin-left: -160px;
   top: 30%;
 }
 
